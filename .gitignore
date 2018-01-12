@@ -1,3 +1,18 @@
+# ===============================================
+# ========== SPORTSUNITED IGNOREDFILES ==========
+# ===============================================
+
+.credentials.py
+*.credentials.py
+src/.DS_Store
+src/sportsunited/settings/credentials.py
+.DS_Store
+
+# ================================================
+# ========== GITHUB PYTHON IGNOREDFILES ==========
+# ================================================
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -99,3 +114,11 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+
+
+
+
+
+
+
