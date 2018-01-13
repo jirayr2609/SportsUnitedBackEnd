@@ -15,7 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls import include, url
+from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+
+
+    # url(r'^api/v1/', include('authentication.urls')),
+    # url(r"^account/", include('accounts.urls')),
+    # url(r'^rest-auth/', include('rest_auth.urls')),
+    # url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    # url(r'^api-token-auth/', obtain_jwt_token),
+    # url(r'^admin/', include(admin.site.urls)),
+    # url(r'^accounts/', include('allauth.urls')),
+    # url(r'^photologue/', include('photologue.urls', namespace='photologue')),
