@@ -2,38 +2,23 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import *
 
-# class UserAdmin(BaseUserAdmin):
-#     search_fields = ('email', 'first_name')
-#     ordering = ('email',)
-#     list_display = ('id', 'email', 'first_name')
-
-#     fieldsets = (
-#         (None, {'fields': ('email', 'phone', 'password')}),
-#         (('Personal info'), {'fields': ('first_name', 'last_name')}),
-#         (('Permissions'), {'fields': ('is_active', 'is_staff')}),
-#         (('Important dates'), {'fields': ('last_login')}),
-#     )
-
-
-# admin.site.register(User, UserAdmin)
-
 class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('email', 'date_of_birth', 'is_admin')
+    list_display = ('id', 'email', 'first_name', 'last_name', 'is_admin', 'created_at', 'updated_at')
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('date_of_birth',)}),
-        ('Permissions', {'fields': ('is_admin',)}),
+        ('Personal info', {'fields': ('username', 'first_name', 'last_name', 'credential', 'date_of_birth', )}),
+        ('Permissions', {'fields': ('is_admin', 'is_staff')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'date_of_birth', 'password1', 'password2')}
+            'fields': ('email', 'username', 'password1', 'password2', 'first_name', 'last_name', 'date_of_birth', 'is_active', 'is_admin', 'is_staff', 'credential', )}
         ),
     )
     search_fields = ('email',)
@@ -42,6 +27,3 @@ class UserAdmin(BaseUserAdmin):
 
 # Now register the new UserAdmin...
 admin.site.register(User, UserAdmin)
-# ... and, since we're not using Django's built-in permissions,
-# unregister the Group model from admin.
-#admin.site.unregister(Group)

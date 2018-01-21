@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+#from django.contrib.postgres.fields import JSONField
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -26,13 +27,23 @@ class UserManager(BaseUserManager):
 		return user
 
 class EmailLoginField(models.EmailField):
-    def get_prep_value(self, value):
-        if value == '':
-            return None
-        return value
+	def get_prep_value(self, value):
+		if value == '':
+			return None
+		return value
 
 class User(AbstractBaseUser, PermissionsMixin):
+	A = "A"
+	T = "T"
+	L = "L"
+	ADMIN = "Admin"
+	credential_choices = ( (A, "Athlete"), 
+		(T, "Team"),
+		(L, "League Organizer"),
+		(ADMIN, "ADMIN") )
+
 	email = EmailLoginField(unique=True, blank=True, null=True, verbose_name='email address')
+	username = models.CharField(max_length=200, unique=True, blank=True, null=True, verbose_name='Username')
 	first_name = models.CharField(max_length=200, null=True, blank=True, verbose_name="First Name")
 	last_name = models.CharField(max_length=200, null=True, blank=True, verbose_name="Last Name")
 	joined = models.DateTimeField(auto_now_add=True)
@@ -40,6 +51,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 	is_active = models.BooleanField(default=True, verbose_name="is active?")
 	is_admin = models.BooleanField(default=False, verbose_name="is admin?")
 	is_staff = models.BooleanField(default=False, verbose_name="is staff?")
+	credential = models.CharField(max_length=200, choices=credential_choices, null=True,blank=True, verbose_name="Credential")
+	created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+	updated_at = models.DateTimeField(auto_now=True)
+	#region = JSONField(default=dict, blank=True, null=True, verbose_name="Region", help_text="json field containining city, state, country")
 	objects = UserManager()
  	
 	USERNAME_FIELD = 'email'
