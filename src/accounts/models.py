@@ -1,5 +1,8 @@
 from django.db import models
+from django.db.models.signals import pre_save, post_save
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.utils.crypto import get_random_string
+from send_email.views import SendEmail
 #from django.contrib.postgres.fields import JSONField
 
 # Create your models here.
@@ -48,7 +51,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 	last_name = models.CharField(max_length=200, null=True, blank=True, verbose_name="Last Name")
 	joined = models.DateTimeField(auto_now_add=True)
 	date_of_birth = models.DateField(null=True, blank=True, verbose_name="Date of Birth")
-	is_active = models.BooleanField(default=True, verbose_name="is active?")
+	is_active = models.BooleanField(default=False, verbose_name="is active?") # users must confirm email in order to become active
 	is_admin = models.BooleanField(default=False, verbose_name="is admin?")
 	is_staff = models.BooleanField(default=False, verbose_name="is staff?")
 	credential = models.CharField(max_length=200, choices=credential_choices, null=True,blank=True, verbose_name="Credential")
@@ -68,6 +71,34 @@ class User(AbstractBaseUser, PermissionsMixin):
 			return "self"
 		else:
 			return self.email
+
+class EmailConfirmation(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, verbose_name="User")
+	token = models.CharField(max_length=128, blank=True, null=True, verbose_name="Generated Token")
+	has_confirmed = models.BooleanField(default=False, verbose_name="Confirmed ?", help_text="Has the user confirmed his email?")
+	created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+	def __str__(self):
+		return "[New User] " + self.user.email
+
+# =========================================
+# ========= PRE POST SAVE SIGNALS =========
+# =========================================
+
+def post_save_email_registration_confirmation(sender, instance, **kwargs):
+    if kwargs['created']: # this is only applied when new users are added to the User model
+    	# SENDING EMAIL TO CONFIRM REGISTRATION AND CREATING TOKEN FOR USER TO VERIFY
+	    email_instace = SendEmail()
+	    generated_token = get_random_string(length=64)
+	    EmailConfirmation.objects.create(user=instance, token=generated_token)
+	    email_instace.send_confirm_registration(instance.email, generated_token)
+
+post_save.connect(post_save_email_registration_confirmation, sender=User)
+
+
+
+
+
 
 
 

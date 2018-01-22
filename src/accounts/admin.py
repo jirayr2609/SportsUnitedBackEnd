@@ -6,12 +6,12 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('id', 'email', 'first_name', 'last_name', 'is_admin', 'created_at', 'updated_at')
+    list_display = ('id', 'email', 'first_name', 'last_name', 'is_admin', 'is_active', 'created_at', 'updated_at')
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('username', 'first_name', 'last_name', 'credential', 'date_of_birth', )}),
-        ('Permissions', {'fields': ('is_admin', 'is_staff')}),
+        ('Permissions', {'fields': ('is_admin', 'is_staff', 'is_active')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
@@ -27,3 +27,10 @@ class UserAdmin(BaseUserAdmin):
 
 # Now register the new UserAdmin...
 admin.site.register(User, UserAdmin)
+
+
+
+class EmailConfirmationAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'token', 'has_confirmed']
+
+admin.site.register(EmailConfirmation, EmailConfirmationAdmin)
