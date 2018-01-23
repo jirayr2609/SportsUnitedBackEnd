@@ -66,6 +66,15 @@ class CustomLoadUserView(UserDetailsView):
 
 class SportaRegistrationViewSet(viewsets.ModelViewSet):
 	authentication_classes = (TokenAuthentication,)
-	permission_classes = (AllowAny,)
-	queryset = User.objects.all()
+	# permission_classes = (AllowAny,)
+	# queryset = User.objects.all()
 	serializers_class = SportaRegistrationSerializer
+
+	def put(self):
+		print ("REQUEST")
+		print (request.user)
+		return Response(status=status.HTTP_201_CREATED)
+
+
+
+
