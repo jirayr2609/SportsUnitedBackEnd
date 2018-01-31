@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'teams',
     'athletes',
     'send_email',
+    'games',
 
     # THIRD PARTY DJANGO APPS
     'rest_framework',
