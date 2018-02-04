@@ -226,3 +226,10 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = None
 
 
+REST_AUTH_SERIALIZERS = { 
+    'USER_DETAILS_SERIALIZER':'accounts.serializers.UserSerializer',
+    # 'LOGIN_SERIALIZER': 'accounts.serializers.LoginSerializer',
+}
+
+
+

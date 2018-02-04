@@ -16,14 +16,6 @@ from rest_framework.response import Response
 from .models import *
 from .serializers import *
 
-# Create your views here.
-# class CustomRegisterView(RegisterView):
-# 	def get_response_data(self, user):
-# 		print("IN CUSTOM REGISTER VIEW")
-# 		print (self.request)
-# 		if allauth_settings.EMAIL_VERIFICATION == \
-# 				allauth_settings.EmailVerificationMethod.OPTIONAL:
-# 					return TokenSerializer(user.auth_token).data
 
 class VerifyEmailViewSet(viewsets.GenericViewSet):
 	permission_classes = (AllowAny,) # user making a request to this view is anonymous
@@ -57,12 +49,7 @@ class Logout(LogoutView):
 class CustomLoadUserView(UserDetailsView):
 	permission_classes = (IsAuthenticated,)
 	authentication_classes = (TokenAuthentication,)
-
-# class CustomVerifyEmail(VerifyEmailView):
-# 	permission_classes = (AllowAny,) 
-# 	authentication_classes = (TokenAuthentication,)
-# 	print ("VEREFYING EMAIL")
-
+	
 
 class SportaRegistrationViewSet(viewsets.ModelViewSet):
 	authentication_classes = (TokenAuthentication,)
@@ -73,7 +60,16 @@ class SportaRegistrationViewSet(viewsets.ModelViewSet):
 	def put(self):
 		print ("REQUEST")
 		print (request.user)
+		user = request.user
 		return Response(status=status.HTTP_201_CREATED)
+
+
+
+
+
+
+
+
 
 
 
