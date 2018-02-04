@@ -23,7 +23,7 @@ from rest_framework_jwt.views import verify_jwt_token
 urlpatterns = [
     # Main BackEnd routes
     path('admin/', admin.site.urls),
-    url(r'^api/sporta/accounts/', include('accounts.urls'), name='accounts-url'), # login, logout, loaduser, email confirmation.
+    url(r'^api/sporta/accounts/', include('accounts.urls'), name='accounts-url'), # email confirmation.
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')), # Basic registration goes through here
     # Other routes that may require implementation in the future
@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-verify/', verify_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
+    # url(r'^api/sporta/athletes/', include('athletes.urls'), name='athletes-url')
 ]
 
 

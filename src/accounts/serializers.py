@@ -6,19 +6,31 @@ from .models import *
 class UserSerializer(serializers.ModelSerializer):
 	request_login = serializers.SerializerMethodField()
 	request_load = serializers.SerializerMethodField()
-	
+
 	def get_request_login(self, obj):
-		if self.context['request'].method == 'POST':
-			return True
-		else:
-			return False
+		returned_value = False
+		try: 
+			if self.context['request'].method == 'POST':
+				returned_value =  True
+			else:
+				returned_value = False
+		except:
+			returned_value = False
+
+		return returned_value
 
 	def get_request_load(self, obj):
-		if self.context['request'].method == 'POST':
-			return False
-		else:
-			return True
+		returned_value = False
+		try: 
+			if self.context['request'].method == 'POST':
+				returned_value =  False
+			else:
+				returned_value = True
+		except:
+			returned_value = False
 
+		return returned_value
+		
 	class Meta:
 		model = User
 		fields = ('id', 'request_load', 'request_login', 'email', 'username', 'first_name', 'last_name', 'joined', 'date_of_birth', 'is_active', 'is_admin', 'is_staff', 'credential', 'created_at', 'updated_at')
