@@ -215,8 +215,8 @@ REST_USE_JWT = True
 
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'e.amespizarro@gmail.com' # add your email here
-EMAIL_HOST_PASSWORD = 'DOWORKson1992' 
+EMAIL_HOST_USER = '' # add your email here
+EMAIL_HOST_PASSWORD = '' 
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

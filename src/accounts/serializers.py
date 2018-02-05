@@ -6,6 +6,7 @@ from .models import *
 class UserSerializer(serializers.ModelSerializer):
 	request_login = serializers.SerializerMethodField()
 	request_load = serializers.SerializerMethodField()
+	request_register = serializers.SerializerMethodField()
 
 	def get_request_login(self, obj):
 		returned_value = False
@@ -31,6 +32,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 		return returned_value
 		
+	def get_request_register(self, obj):
+		returned_value = False
+
 	class Meta:
 		model = User
 		fields = ('id', 'request_load', 'request_login', 'email', 'username', 'first_name', 'last_name', 'joined', 'date_of_birth', 'is_active', 'is_admin', 'is_staff', 'credential', 'created_at', 'updated_at')
