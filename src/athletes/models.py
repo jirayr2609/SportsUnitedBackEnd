@@ -1,7 +1,9 @@
 from django.db import models
 from accounts.models import User 
 
-# Create your models here.
+class Sport(models.Model):
+    name = models.CharField(max_length=15)
+
 class Athlete(models.Model):
     id = models.OneToOneField(
         User,
@@ -18,7 +20,7 @@ class Athlete(models.Model):
     #etc...
 
 class SoccerAthlete(models.Model):
-    userID = models.ForeignKey(
+    user_id = models.ForeignKey(
         User, 
         on_delete=models.CASCADE,
         )
