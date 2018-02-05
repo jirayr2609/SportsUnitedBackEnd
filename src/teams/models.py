@@ -1,10 +1,13 @@
 from django.db import models
 from accounts.models import User
+from athletes.models import Sport
 
 # Core team model
 class Team(models.Model):
-    teamID = models.AutoField(primary_key=True)
-    sportID = 0 # we need to make a sport table to hold all of the sport names and sport properties
+    sport_id = models.ForeignKey(
+        Sport, 
+        on_delete=models.CASCADE,
+    )
     captain = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -16,16 +19,15 @@ class Team(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class TeamOwnerPermissions(models.Model):
-    permissionID = models.AutoField(primary_key=True)
     permission = models.CharField(max_length=20)
 
 # Keeps track of all team owners
 class TeamOwner(models.Model):
-    teamID = models.ForeignKey(
+    team_id = models.ForeignKey(
         Team, 
         on_delete=models.CASCADE,
         )
-    userID = models.ForeignKey(
+    user_id = models.ForeignKey(
         User, 
         on_delete=models.CASCADE,
         )
@@ -36,11 +38,11 @@ class TeamOwner(models.Model):
 
 # Keeps track of all team players
 class TeamPlayers(models.Model):
-    teamID = models.ForeignKey(
+    team_id = models.ForeignKey(
         Team, 
         on_delete=models.CASCADE,
     )
-    userID = models.ForeignKey(
+    user_id = models.ForeignKey(
         User, 
         on_delete=models.CASCADE,
     )
@@ -49,9 +51,9 @@ class TeamPlayers(models.Model):
 
 # Keeps track of all team accolades
 class TeamAccolades(models.Model):
-    teamID = models.ForeignKey(
+    team_id = models.ForeignKey(
         Team, 
         on_delete=models.CASCADE,
     )
-    leagueID = models.IntegerField()
+    league_id = models.IntegerField()
     accolade =  models.CharField(max_length=50)
