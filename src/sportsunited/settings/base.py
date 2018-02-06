@@ -215,8 +215,8 @@ REST_USE_JWT = True
 
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = '' # add your email here
-EMAIL_HOST_PASSWORD = '' 
+EMAIL_HOST_USER = MYEMAIL # create a variable MYEMAIL in credentials.py
+EMAIL_HOST_PASSWORD = MYEMAILPASSWORD  #create a variable MYEMAILPASSWORD in credentials.py
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

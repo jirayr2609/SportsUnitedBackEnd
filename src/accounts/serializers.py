@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
 			else:
 				returned_value = False
 		except:
-			returned_value = False
+			returned_value = Falseg
 
 		return returned_value
 
