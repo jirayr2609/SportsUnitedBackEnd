@@ -29,13 +29,12 @@ class VerifyEmailViewSet(viewsets.GenericViewSet):
 			user_instance = User.objects.get(id=user_id)
 			user_instance.is_active = True
 			user_instance.save()
-			
+
 			user_quick_info = {
-				'user':	{
-						'id': user_instance.id,
-						'email': user_instance.email,
-						'is_active': True
-						}
+				'id': user_instance.id,
+				'email': user_instance.email,
+				'is_active': True,
+				'new_register': True
 			}
 
 			return Response(user_quick_info, status=status.HTTP_201_CREATED)

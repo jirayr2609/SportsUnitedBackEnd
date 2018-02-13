@@ -9,7 +9,8 @@ class SendEmail(object):
 		self.url = 'https://sporta.com/'
 		self.company_name = 'SPORTA'
 		self.from_email = 'e.amespizarro@gmail.com'
-		self.cc = ['plugr@zahncenternyc.com']
+		# self.cc = ['plugr@zahncenternyc.com']
+		self.cc = ['']
 
 	def release_email(self, sub, body, frm, to, cc=None):
 		constructing_email = EmailMessage(sub, body, frm, to, cc=cc)

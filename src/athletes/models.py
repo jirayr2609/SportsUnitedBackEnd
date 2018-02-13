@@ -20,7 +20,7 @@ class Athlete(models.Model):
     #etc...
 
 class SoccerAthlete(models.Model):
-    user_id = models.ForeignKey(
+    user_instance = models.ForeignKey(
         User, 
         on_delete=models.CASCADE,
         )

@@ -4,7 +4,7 @@ from athletes.models import Sport
 
 # Core team model
 class Team(models.Model):
-    sport_id = models.ForeignKey(
+    sport_instance = models.ForeignKey(
         Sport, 
         on_delete=models.CASCADE,
     )
@@ -23,11 +23,11 @@ class TeamOwnerPermissions(models.Model):
 
 # Keeps track of all team owners
 class TeamOwner(models.Model):
-    team_id = models.ForeignKey(
+    team_instance = models.ForeignKey(
         Team, 
         on_delete=models.CASCADE,
         )
-    user_id = models.ForeignKey(
+    user_instance = models.ForeignKey(
         User, 
         on_delete=models.CASCADE,
         )
@@ -38,11 +38,11 @@ class TeamOwner(models.Model):
 
 # Keeps track of all team players
 class TeamPlayers(models.Model):
-    team_id = models.ForeignKey(
+    team_instance = models.ForeignKey(
         Team, 
         on_delete=models.CASCADE,
     )
-    user_id = models.ForeignKey(
+    user_instance = models.ForeignKey(
         User, 
         on_delete=models.CASCADE,
     )
@@ -51,9 +51,9 @@ class TeamPlayers(models.Model):
 
 # Keeps track of all team accolades
 class TeamAccolades(models.Model):
-    team_id = models.ForeignKey(
+    team_instance = models.ForeignKey(
         Team, 
         on_delete=models.CASCADE,
     )
-    league_id = models.IntegerField()
+    league_instance = models.IntegerField()
     accolade =  models.CharField(max_length=50)

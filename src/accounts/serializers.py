@@ -6,7 +6,6 @@ from .models import *
 class UserSerializer(serializers.ModelSerializer):
 	request_login = serializers.SerializerMethodField()
 	request_load = serializers.SerializerMethodField()
-	request_register = serializers.SerializerMethodField()
 
 	def get_request_login(self, obj):
 		returned_value = False
@@ -16,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
 			else:
 				returned_value = False
 		except:
-			returned_value = Falseg
+			returned_value = False
 
 		return returned_value
 
@@ -31,9 +30,6 @@ class UserSerializer(serializers.ModelSerializer):
 			returned_value = False
 
 		return returned_value
-		
-	def get_request_register(self, obj):
-		returned_value = False
 
 	class Meta:
 		model = User

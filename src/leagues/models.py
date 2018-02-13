@@ -5,7 +5,7 @@ from athletes.models import Sport
 
 # Core league data structure
 class League(models.Model):
-    sport_id = models.ForeignKey(
+    sport_instance = models.ForeignKey(
         Sport, 
         on_delete=models.CASCADE,
     )
@@ -24,7 +24,7 @@ class League(models.Model):
 
 #Stores all locations for a league
 class LeagueLocations(models.Model):
-    league_id = models.ForeignKey(
+    league_instance = models.ForeignKey(
         League,
         on_delete=models.CASCADE,
     )
@@ -35,11 +35,11 @@ class LeagueOwnerPermissions(models.Model):
 
 #Keeps track of the different owners of a league
 class LeagueOwner(models.Model):
-    league_id = models.ForeignKey(
+    league_instance = models.ForeignKey(
         League,
         on_delete=models.CASCADE,
     )
-    owner_id = models.ForeignKey(
+    owner_instance = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
     )
@@ -50,18 +50,18 @@ class LeagueOwner(models.Model):
 
 #Keeps a track of all the leagues in a league
 class LeagueTeams(models.Model):
-    league_id = models.ForeignKey(
+    league_instance = models.ForeignKey(
         League,
         on_delete=models.CASCADE,
     )
-    team_id = models.ForeignKey(
+    team_instance = models.ForeignKey(
         Team,
         on_delete=models.CASCADE,
     )
 
 #Should be populated on the end of a season
 class LeagueHistory(models.Model):
-    league_id = models.ForeignKey(
+    league_instance = models.ForeignKey(
         League,
         on_delete=models.CASCADE,
     )

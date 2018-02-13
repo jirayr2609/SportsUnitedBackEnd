@@ -24,7 +24,7 @@ class Game(models.Model):
     )
 
 class SoccerGame(models.Model):
-    game_id = models.ForeignKey(
+    game_instance = models.ForeignKey(
         Game,
         on_delete=models.CASCADE
     )
@@ -33,11 +33,11 @@ class SoccerGame(models.Model):
 #create a new model for each new sport added to the platform...
 
 class Referee(models.Model):
-    user_id = models.ForeignKey(
+    user_instance = models.ForeignKey(
         User,
         on_delete=models.CASCADE
     )
-    game_id = models.ForeignKey(
+    game_instance = models.ForeignKey(
         Game,
         on_delete=models.CASCADE
     )
