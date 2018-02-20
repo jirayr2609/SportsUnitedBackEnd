@@ -11,7 +11,6 @@ class Athlete(models.Model):
         primary_key=True,
     )
     bio = models.CharField(max_length=125)
-
     #sports interested in for recruiting
     soccer = models.BooleanField(default=False)
     #basketball = models.BooleanField(default=False)
