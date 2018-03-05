@@ -37,6 +37,7 @@ Athletes:
 	http://127.0.0.1:8000/api/sporta/athletes/user_id/
 
 Teams:
+
 	Get all
 	http://127.0.0.1:8000/api/sporta/teams/
 
