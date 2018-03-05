@@ -1,6 +1,6 @@
 from django.db import models
 from teams.models import Team
-from leagues.models import LeagueLocations
+from leagues.models import League
 from accounts.models import User
 from athletes.models import Sport
 
@@ -17,8 +17,8 @@ class Game(models.Model):
     day = models.DateField()
     time_start = models.TimeField()
     time_end = models.TimeField()
-    location = models.ForeignKey(
-        LeagueLocations,
+    location = models.ForeignKey( # Pull locations from this when implemented
+        League,
         related_name='home_team',
         on_delete=models.CASCADE
     )

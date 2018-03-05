@@ -3,5 +3,5 @@ from .models import *
 
 admin.site.register(Sport)
 admin.site.register(Athlete)
-admin.site.register(SoccerAthlete)
+admin.site.register(SoccerStats)
 

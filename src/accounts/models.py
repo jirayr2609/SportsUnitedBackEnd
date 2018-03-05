@@ -3,6 +3,9 @@ from django.db.models.signals import pre_save, post_save
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.utils.crypto import get_random_string
 from send_email.views import SendEmail
+from teams.models import Team
+from leagues.models import LeagueOwnerPermissions
+
 #from django.contrib.postgres.fields import JSONField
 
 # Create your models here.
@@ -36,6 +39,18 @@ class EmailLoginField(models.EmailField):
 		return value
 
 class User(AbstractBaseUser, PermissionsMixin):
+	# Field for leagues
+	league_admin = models.ManyToManyField(
+		LeagueOwnerPermissions,
+		blank=True
+	)
+
+	# Field for team
+	team_captain = models.ManyToManyField(
+		Team,
+		blank=True
+	)
+
 	A = "A"
 	T = "T"
 	L = "L"

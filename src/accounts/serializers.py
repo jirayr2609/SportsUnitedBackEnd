@@ -35,6 +35,10 @@ class UserSerializer(serializers.ModelSerializer):
 		model = User
 		fields = ('id', 'request_load', 'request_login', 'email', 'username', 'first_name', 'last_name', 'joined', 'date_of_birth', 'is_active', 'is_admin', 'is_staff', 'credential', 'created_at', 'updated_at')
 
+class UserInfoserializer(serializers.ModelSerializer):
+	class Meta:
+		model = User
+		fields = ('id', 'email', 'username', 'first_name', 'last_name')
 
 class SportaRegistrationSerializer(serializers.Serializer):
 	class meta:

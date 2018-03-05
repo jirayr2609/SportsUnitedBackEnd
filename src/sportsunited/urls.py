@@ -31,7 +31,11 @@ urlpatterns = [
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-verify/', verify_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
-    url(r'^api/sporta/athletes/', include('athletes.urls'), name='athletes-url')
+
+    url(r'^api/sporta/athletes/', include('athletes.urls'), name='athletes-url'),
+    url(r'^api/sporta/teams/', include('teams.urls'), name='teams-url'),    
+    url(r'^api/sporta/leagues/', include('leagues.urls'), name='leagues-url')
+
 ]
 
 
