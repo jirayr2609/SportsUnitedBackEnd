@@ -24,3 +24,34 @@ Make sure that you run the following commads where src/ is located
 	cd src
 
 	python manage.py runserver 0:8000
+	
+# Active Enpoints
+[GET] ENDPOINTS
+
+Athletes:
+
+	Get all
+	http://127.0.0.1:8000/api/sporta/athletes/
+
+	Get specific
+	http://127.0.0.1:8000/api/sporta/athletes/user_id/
+
+Teams:
+	Get all
+	http://127.0.0.1:8000/api/sporta/teams/
+
+	Get specific
+	http://127.0.0.1:8000/api/sporta/teams/team_id/
+
+Leagues:
+
+	Get all
+	http://127.0.0.1:8000/api/sporta/leagues/
+
+	Get specific
+	http://127.0.0.1:8000/api/sporta/leagues/league_id/
+
+[POST] ENDPOINTS
+Athletes:
+	Create
+	http://127.0.0.1:8000/api/sporta/athletes/
