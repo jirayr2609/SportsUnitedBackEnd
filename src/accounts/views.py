@@ -41,6 +41,17 @@ class VerifyEmailViewSet(viewsets.GenericViewSet):
 		else:
 			return Response({'error': 'token invalid'}, status=status.HTTP_400_BAD_REQUEST)
 
+class VerifyUsernameViewSet(viewsets.GenericViewSet):
+	permission_classes = (AllowAny,)
+	def create(self, request):
+		check_user = request.data['username']
+		queryset = User.objects.all().filter(username=check_user)
+		print(queryset)
+		if queryset.exists():
+			return Response({'available': 'false'})
+		else:
+			return Response({'available': 'true'})
+
 class Logout(LogoutView):
 	permission_classes = (AllowAny,) 
 	authentication_classes = (TokenAuthentication,)

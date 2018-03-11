@@ -17,3 +17,9 @@ class AthleteSerializer(serializers.ModelSerializer):# account fields
         data = validated_data
         register = Athlete.objects.create(**data)
     
+    def update(self, instance, validated_data):
+        for key, value in validated_data.items():
+            if value is not None:
+                setattr(instance, key, value)
+
+        instance.save()

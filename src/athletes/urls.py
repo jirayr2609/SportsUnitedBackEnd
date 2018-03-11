@@ -7,9 +7,6 @@ router = DefaultRouter()
 #This url returns all athletes
 router.register(r'', AthleteViewSet, base_name='athletes')
 
-#This url for anything regarding 1 athlete
-router.register(r'id', AthleteViewSet.get_individual, base_name='athlete')
-
 urlpatterns = [
     url(r'^', include(router.urls)),
 ]

@@ -47,14 +47,94 @@ Teams:
 Leagues:
 
 	Get all
-	http://127.0.0.1:8000/api/sporta/leagues/
+	http://127.0.0.1:8000/api/sporta/leagues/leagues/
 
 	Get specific
-	http://127.0.0.1:8000/api/sporta/leagues/league_id/
+	http://127.0.0.1:8000/api/sporta/leagues/leagues/league_id/
 
 [POST] ENDPOINTS
+
+User:
+	Verify Username:
+	http://127.0.0.1:8000/api/sporta/accounts/verify-username/
+
+	Send:
+	{
+		"username": "username",
+	{
+
+	Returns:
+	{
+		"available": "true/false",
+	}
+
 
 Athletes:
 
 	Create
 	http://127.0.0.1:8000/api/sporta/athletes/
+	Send:
+	{
+            	'user': user,
+            	'bio': bio,
+        }
+
+Teams:
+
+	Create
+	http://127.0.0.1:8000/api/sporta/teams/
+	Send:
+	{
+            	'name': ,
+            	'abbrev': ,
+            	'bio': ,
+            	'created_at': ,
+            	'updated_at': ,
+        }
+Leagues:
+	Create
+	http://127.0.0.1:8000/api/sporta/leagues/leagues/
+	Send:
+	{
+            	'name': ,
+            	'abbrev': ,
+            	'bio': ,
+            	'league_start': ,
+            	'league_end': ,
+            	'playoff_start': ,
+        }
+
+[PUT] ENDPOINTS
+
+	Update League:
+	http://127.0.0.1:8000/api/sporta/leagues/leagues/
+	Send:
+	{
+            	"id": "league_id",
+            	"name": "",
+            	"abbrev": "",
+            	"bio": "",
+            	"league_start": "",
+            	"league_end": "",
+            	"playoff_start": "",
+        }
+
+	Update Team:
+	http://127.0.0.1:8000/api/sporta/teams/
+	{
+	
+        	'name':,
+            	'abbrev': ,
+            	'bio': ,
+            	'created_at': ,
+            	'updated_at': ,
+        }
+
+	Update Athlete:
+	http://127.0.0.1:8000/api/sporta/athletes/
+	{
+            	'user': user,
+            	'bio': bio,
+        }
+
+

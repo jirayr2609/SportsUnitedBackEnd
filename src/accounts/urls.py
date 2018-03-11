@@ -5,6 +5,7 @@ from .views import *
 router = DefaultRouter()
 router.register(r'sportaregistration', SportaRegistrationViewSet, base_name='sportaregistration'),
 router.register(r'verify-email', VerifyEmailViewSet, base_name='rest_custom_verify_email'),
+router.register(r'verify-username', VerifyUsernameViewSet, base_name='custom_verify_username'),
 
 urlpatterns = [
     url(r'^', include(router.urls)),

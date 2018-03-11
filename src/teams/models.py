@@ -1,6 +1,6 @@
 from django.db import models
 # from athletes.models import Sport
-from leagues.models import League
+from leagues.models import LeagueDivision
 # Core team model
 class Team(models.Model):
     # sport_instance = models.ManyToManyField(
@@ -8,10 +8,10 @@ class Team(models.Model):
     #     blank=True,
     # )
     # Can be apart of multiple leagues
-    league_instance = models.ManyToManyField(
-        League,
+    division_instance = models.ManyToManyField(
+        LeagueDivision,
         blank=True,
-        related_name='teams',
+        related_name='division_teams',
     )
     
     name = models.CharField(max_length=30, blank=False, null=False)

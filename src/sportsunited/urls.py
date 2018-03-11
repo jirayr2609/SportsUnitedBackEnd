@@ -35,7 +35,6 @@ urlpatterns = [
     url(r'^api/sporta/athletes/', include('athletes.urls'), name='athletes-url'),
     url(r'^api/sporta/teams/', include('teams.urls'), name='teams-url'),    
     url(r'^api/sporta/leagues/', include('leagues.urls'), name='leagues-url')
-
 ]
 
 

@@ -4,11 +4,10 @@ from .views import *
 
 router = DefaultRouter()
 
-#This url returns all athletes
-router.register(r'', LeagueViewSet, base_name='leagues')
-
-#This url for anything regarding 1 athlete
-
+#This url returns leagues
+router.register(r'leagues', LeagueViewSet, base_name='leagues'),
+#This url returns divisions 
+router.register(r'divisions', LeagueDivisionViewSet, base_name='leagues_divisions')
 
 urlpatterns = [
     url(r'^', include(router.urls)),
