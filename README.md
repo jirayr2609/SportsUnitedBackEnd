@@ -55,6 +55,7 @@ Leagues:
 [POST] ENDPOINTS
 
 User:
+
 	Verify Username:
 	http://127.0.0.1:8000/api/sporta/accounts/verify-username/
 
@@ -92,6 +93,7 @@ Teams:
             	'updated_at': ,
         }
 Leagues:
+
 	Create
 	http://127.0.0.1:8000/api/sporta/leagues/leagues/
 	Send:
