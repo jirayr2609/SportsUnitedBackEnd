@@ -10,7 +10,7 @@ router.register(r'verify-username', VerifyUsernameViewSet, base_name='custom_ver
 urlpatterns = [
     url(r'^', include(router.urls)),
     # url(r'^registration/$', CustomRegisterView.as_view(), name='rest_custom_register'),
-    
+
     # url(r'^load-user/$', CustomLoadUserView.as_view(), name='rest_custom_load_user'),
     # url(r'^verify-user/$', CustomVerifyEmail.as_view(), name='rest_custom_verify_email'),
     # url(r'^logout/$', Logout.as_view(), name='rest_account_logout'),
