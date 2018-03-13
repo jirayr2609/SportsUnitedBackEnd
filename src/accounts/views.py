@@ -21,7 +21,7 @@ class VerifyEmailViewSet(viewsets.GenericViewSet):
 	permission_classes = (AllowAny,) # user making a request to this view is anonymous
 	def create(self, request):
 		query_param = self.request.query_params.get('token', None)
-		
+
 		if EmailConfirmation.objects.filter(token=query_param).exists():
 			email_confirm_instance = EmailConfirmation.objects.get(token=query_param)
 			user_id = email_confirm_instance.user.id
@@ -41,46 +41,69 @@ class VerifyEmailViewSet(viewsets.GenericViewSet):
 		else:
 			return Response({'error': 'token invalid'}, status=status.HTTP_400_BAD_REQUEST)
 
-class VerifyUsernameViewSet(viewsets.GenericViewSet):
-	permission_classes = (AllowAny,)
-	def create(self, request):
-		check_user = request.data['username']
-		queryset = User.objects.all().filter(username=check_user)
-		print(queryset)
-		if queryset.exists():
-			return Response({'available': 'false'})
-		else:
-			return Response({'available': 'true'})
-
 class Logout(LogoutView):
-	permission_classes = (AllowAny,) 
+	permission_classes = (AllowAny,)
 	authentication_classes = (TokenAuthentication,)
 
 class CustomLoadUserView(UserDetailsView):
 	permission_classes = (IsAuthenticated,)
 	authentication_classes = (TokenAuthentication,)
-	
+
+class VerifyUsernameViewSet(viewsets.ModelViewSet):
+
+	queryset = User.objects.all()
+	serializer_class = SportaRegistrationSerializer
+
+	def create(self, request,format=None):
+		user = request.user
+		username = request.data.get('username', None)
+
+		print(request.data)
+
+		if User.objects.filter(username=user.username).exists():
+			error = "Username already exist"
+			return Response(error, status=status.HTTP_400_BAD_REQUEST)
+		else:
+			massage = "Username is free to use"
+			return Response(massage, status = status.HTTP_201_CREATED)
+
 
 class SportaRegistrationViewSet(viewsets.ModelViewSet):
-	authentication_classes = (TokenAuthentication,)
-	# permission_classes = (AllowAny,)
-	# queryset = User.objects.all()
-	serializers_class = SportaRegistrationSerializer
 
-	def put(self):
-		print ("REQUEST")
-		print (request.user)
+	#permission_classes = (AllowAny,)
+	queryset = User.objects.all()
+	serializer_class = SportaRegistrationSerializer
+
+		#def put(self):
+		#print ("REQUEST")
+		#print (request.user)
+		#user = request.user
+		#return Response(status=status.HTTP_201_CREATED)"""
+	def put(self, request, format=None):
 		user = request.user
-		return Response(status=status.HTTP_201_CREATED)
+		credential = request.data.get('credential', None)
+		first_name = request.data.get('firstName', None)
+		last_name = request.data.get('lastName', None)
+		username = request.data.get('username',None)
 
+		print(request.data)
 
+		if User.objects.filter(email=user.email).exists():
+			user_instance = User.objects.get(email=user.email)
+		else:
+			error = "Unable to Verify"
+			return Response(error, status=status.HTTP_400_BAD_REQUEST)
 
+		registerData = {
+            'first_name': first_name,
+            'last_name': last_name,
+            'credential': credential,
+            'username': username,
+        }
 
-
-
-
-
-
-
-
-
+		serializer = SportaRegistrationSerializer(data=registerData)
+		if serializer.is_valid():
+			serializer.update(user_instance, registerData )
+			return Response(status = status.HTTP_201_CREATED)
+		else:
+			return Response(serializer.error, status = status.HTTP_400_BAD_REQUEST)

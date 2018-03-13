@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 	def get_request_login(self, obj):
 		returned_value = False
-		try: 
+		try:
 			if self.context['request'].method == 'POST':
 				returned_value =  True
 			else:
@@ -21,7 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 	def get_request_load(self, obj):
 		returned_value = False
-		try: 
+		try:
 			if self.context['request'].method == 'POST':
 				returned_value =  False
 			else:
@@ -42,8 +42,14 @@ class UserInfoserializer(serializers.ModelSerializer):
 
 class SportaRegistrationSerializer(serializers.Serializer):
 	class meta:
-		model = User		
-	# def create(self, validated_data):
-	# 	user = User.objects.create(**validated_data)
-	# 	return user
+		model = User
+		fields = ('first_name', 'last_name', 'credential', 'username')
 
+	def update(self, instance, validated_data):
+		print ("here")
+		instance.first_name = validated_data.get('first_name', instance.first_name)
+		instance.last_name = validated_data.get('last_name', instance.last_name)
+		instance.credential = validated_data.get('credential', instance.credential)
+		instance.username = validated_data.get('username', instance.username)
+		instance.save()
+		return instance
