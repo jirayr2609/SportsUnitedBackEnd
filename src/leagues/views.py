@@ -20,6 +20,7 @@ class LeagueViewSet(viewsets.ModelViewSet):
     serializer_class = LeagueSerializer
 
     def get_queryset(self):
+        permission_classes = (AllowAny,) 
         queryset = League.objects.all()
         return queryset
 
