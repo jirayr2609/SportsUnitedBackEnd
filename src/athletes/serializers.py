@@ -1,6 +1,5 @@
 from rest_framework import serializers
 
-from accounts.serializers import UserInfoserializer
 from .models import *
 
 class AthleteSerializer(serializers.ModelSerializer):# account fields
@@ -23,3 +22,14 @@ class AthleteSerializer(serializers.ModelSerializer):# account fields
                 setattr(instance, key, value)
 
         instance.save()
+
+class SoccerStatsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SoccerStats
+        fields = '__all__'
+
+class AthleteInfoSerializer(serializers.ModelSerializer):
+    athlete_soccer_stats = SoccerStatsSerializer(many=True)
+    class Meta:
+        model = Athlete
+        fields = '__all__'

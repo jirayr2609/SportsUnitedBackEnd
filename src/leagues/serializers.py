@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import *
 from teams.serializers import TeamSerializer
-from accounts.serializers import UserInfoserializer
 from athletes.serializers import AthleteSerializer
 
 class LeagueDivisionSerializer(serializers.ModelSerializer):
@@ -31,5 +30,4 @@ class LeagueSerializer(serializers.ModelSerializer):
         for key, value in validated_data.items():
             if value is not None:
                 setattr(instance, key, value)
-
         instance.save()

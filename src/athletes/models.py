@@ -10,7 +10,8 @@ class Athlete(models.Model):
     user_instance = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
-        primary_key=True
+        primary_key=True,
+        related_name='user_athlete'
     )
     team_instance = models.ManyToManyField(
         Team,
@@ -32,9 +33,25 @@ class Athlete(models.Model):
     #etc...
 
 class SoccerStats(models.Model):
-    athlete_instance = models.ForeignKey(
+    athlete_instance = models.ManyToManyField(
         Athlete, 
-        on_delete=models.CASCADE,
+        blank=False,
+        related_name='athlete_soccer_stats'
         )
+
+    athlete_league = models.ManyToManyField(
+        League,
+        blank=False,
+        related_name='athlete_league_history',
+    )
+
+    athlete_team = models.ManyToManyField(
+        Team,
+        blank=False,
+        related_name='athlete_team_history'
+    )
+    #Game instance to be added...
+
     #input sport stats below...
+    goals = models.IntegerField(blank=True, null=True)
 #add new classes for when we add more sports
