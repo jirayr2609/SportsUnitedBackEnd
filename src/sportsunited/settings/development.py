@@ -35,7 +35,7 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -197,6 +197,15 @@ REST_FRAMEWORK = {
     #     'rest_framework.parsers.YAMLParser',
     # )
 }
+
+
+CORS_ORIGIN_WHITELIST = (
+    '52.90.93.190',
+    '52.90.93.190:8000',
+    'localhost:8000',
+    'localhost:8080',
+    'localhost'
+)
 
 CORS_ALLOW_HEADERS = (
     'x-requested-with',

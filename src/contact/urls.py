@@ -4,7 +4,7 @@ from .views import *
 
 router = DefaultRouter()
 
-router.register(r'', ContactRegistrationViewSet, base_name='contactregistration'),
+router.register(r'', ContactViewSet, base_name='contactsporta'),
 
 
 urlpatterns = [

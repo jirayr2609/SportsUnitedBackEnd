@@ -14,4 +14,7 @@ class Contact(models.Model):
 	datesent = models.DateTimeField(auto_now_add=True, verbose_name="Date")
 
 
+	def __str__(self):
+		return self.name
+
 	# Create your models here.
