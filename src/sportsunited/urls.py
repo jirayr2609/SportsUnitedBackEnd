@@ -26,12 +26,16 @@ urlpatterns = [
     url(r'^api/sporta/accounts/', include('accounts.urls'), name='accounts-url'), # email confirmation.
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')), # Basic registration goes through here
+    url(r'^api/sporta/contact/', include('contact.urls'), name='contact-url'),
     # Other routes that may require implementation in the future
     url(r'^account/', include('allauth.urls')),
     url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^api-token-verify/', verify_jwt_token),
     url(r'^api-token-refresh/', refresh_jwt_token),
-    # url(r'^api/sporta/athletes/', include('athletes.urls'), name='athletes-url')
+
+    url(r'^api/sporta/athletes/', include('athletes.urls'), name='athletes-url'),
+    url(r'^api/sporta/teams/', include('teams.urls'), name='teams-url'),
+    url(r'^api/sporta/leagues/', include('leagues.urls'), name='leagues-url')
 ]
 
 
