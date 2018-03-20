@@ -60,12 +60,11 @@ class VerifyUsernameViewSet(viewsets.ModelViewSet):
 
 		print(request.data)
 
-		if User.objects.filter(username=user.username).exists():
-			error = "Username already exist"
-			return Response(error, status=status.HTTP_400_BAD_REQUEST)
+		if User.objects.filter(username=username).exists():
+			message ={ "error" : "Username already exist"}
+			return Response(message, status=status.HTTP_400_BAD_REQUEST)
 		else:
-			massage = "Username is free to use"
-			return Response(massage, status = status.HTTP_201_CREATED)
+			return Response(status = status.HTTP_201_CREATED)
 
 
 class SportaRegistrationViewSet(viewsets.ModelViewSet):
@@ -100,6 +99,9 @@ class SportaRegistrationViewSet(viewsets.ModelViewSet):
             'credential': credential,
             'username': username,
         }
+		registerData = dict(filter(lambda x: x[1] != "", registerData.items()))
+
+
 
 		serializer = SportaRegistrationSerializer(data=registerData)
 		if serializer.is_valid():

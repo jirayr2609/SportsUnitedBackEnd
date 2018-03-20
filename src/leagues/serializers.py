@@ -18,7 +18,7 @@ class LeagueDivisionSerializer(serializers.ModelSerializer):
 class LeagueSerializer(serializers.ModelSerializer):
     league_divisions = LeagueDivisionSerializer(many=True, required=False)
     league_athletes = AthleteSerializer(many=True, required=False)
-    
+
     class Meta:
         model = League
         fields = '__all__'

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'athletes',
     'send_email',
     'games',
+    'contact',
 
     # THIRD PARTY DJANGO APPS
     'rest_framework',
@@ -222,15 +223,12 @@ EMAIL_USE_TLS = True
 
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True   
+ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = None
 
 
-REST_AUTH_SERIALIZERS = { 
+REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER':'accounts.serializers.UserSerializer',
     # 'LOGIN_SERIALIZER': 'accounts.serializers.LoginSerializer',
 }
-
-
-
