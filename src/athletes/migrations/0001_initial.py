@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         ('teams', '0001_initial'),
         ('leagues', '0001_initial'),
         ('accounts', '0001_initial'),
+        ('teams', '0001_initial'),
     ]
 
     operations = [

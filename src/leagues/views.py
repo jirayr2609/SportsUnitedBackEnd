@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
-from rest_framework.authentication import TokenAuthentication 
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
@@ -16,11 +16,11 @@ class LeagueDivisionViewSet(viewsets.ModelViewSet):
         return queryset
 
 class LeagueViewSet(viewsets.ModelViewSet):
-    permission_classes = (AllowAny,) 
+    permission_classes = (AllowAny,)
     serializer_class = LeagueSerializer
 
     def get_queryset(self):
-        permission_classes = (AllowAny,) 
+        permission_classes = (AllowAny,)
         queryset = League.objects.all()
         return queryset
 
@@ -47,7 +47,7 @@ class LeagueViewSet(viewsets.ModelViewSet):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    # used for updating 
+    # used for updating
     def put(self, request):
         user = request.user.id
         league = League.objects.get(id=request.data.get('id',None))
