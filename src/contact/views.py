@@ -17,18 +17,21 @@ class ContactViewSet(viewsets.ModelViewSet):
 		name = request.data.get('name', None)
 		email = request.data.get('email',None)
 		message = request.data.get('message', None)
+		beta = request.data.get('beta', None)
 		datesent = request.data.get('datesent',None)
 		registerData = {
-            'name': name,
+			'name': name,
 			'credential': credential,
-            'email': email,
-            'message': message,
-            'datesent': datesent
-        }
+			'email': email,
+			'message': message,
+			'datesent': datesent
+		}
+
+		if beta is not None:
+			registerData['beta_registration'] = True
 
 		serializer = ContactSerializer(data=registerData)
 		if serializer.is_valid():
-
 			new_data = serializer.create(serializer.validated_data)
 			return Response(status = status.HTTP_201_CREATED)
 		else:

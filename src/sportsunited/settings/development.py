@@ -35,7 +35,7 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', '52.90.93.190', '52.90.93.190/api/', '52.90.93.190/api']
 
 
 # Application definition
