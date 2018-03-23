@@ -54,9 +54,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 	A = "A"
 	T = "T"
 	L = "L"
+	R = "R"
 	ADMIN = "Admin"
 	credential_choices = ( (A, "Athlete"),
 		(T, "Team"),
+		(R,"Referee"),
 		(L, "League Organizer"),
 		(ADMIN, "ADMIN") )
 

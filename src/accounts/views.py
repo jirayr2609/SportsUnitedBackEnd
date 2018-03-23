@@ -51,24 +51,6 @@ class CustomLoadUserView(UserDetailsView):
 	permission_classes = (IsAuthenticated,)
 	authentication_classes = (TokenAuthentication,)
 
-<<<<<<< HEAD
-class VerifyUsernameViewSet(viewsets.ModelViewSet):
-
-	queryset = User.objects.all()
-	serializer_class = SportaRegistrationSerializer
-
-	def create(self, request,format=None):
-		user = request.user
-		username = request.data.get('username', None)
-
-		print(request.data)
-
-		if User.objects.filter(username=username).exists():
-			message ={ "error" : "Username already exist"}
-			return Response(message, status=status.HTTP_400_BAD_REQUEST)
-		else:
-			return Response(status = status.HTTP_201_CREATED)
-=======
 class VerifyUsernameViewSet(viewsets.GenericViewSet):
 	permission_classes = (AllowAny,)
 	def create(self, request):
@@ -79,7 +61,7 @@ class VerifyUsernameViewSet(viewsets.GenericViewSet):
 			return Response({'available': 'false'})
 		else:
 			return Response({'available': 'true'})
->>>>>>> 5835526efe6160115b528c47f47fb50a9bbf30ab
+
 
 
 class SportaRegistrationViewSet(viewsets.ModelViewSet):

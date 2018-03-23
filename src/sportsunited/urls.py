@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^api/sporta/accounts/', include('accounts.urls'), name='accounts-url'), # email confirmation.
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')), # Basic registration goes through here
-    url(r'^api/sporta/contact/', include('contact.urls'), name='contact-url'),
+    url(r'^api/sporta/contacts/', include('contacts.urls'), name='contacts-url'),
     # Other routes that may require implementation in the future
     url(r'^account/', include('allauth.urls')),
     url(r'^api-token-auth/', obtain_jwt_token),
