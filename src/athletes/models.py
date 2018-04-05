@@ -7,51 +7,66 @@ class Sport(models.Model):
     name = models.CharField(max_length=15)
 
 class Athlete(models.Model):
+    def __str__(self):
+        return self.user_instance.email
+
     user_instance = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
         primary_key=True,
         related_name='user_athlete'
     )
+    # should show what team they are apart of
     team_instance = models.ManyToManyField(
         Team,
+        through='AthleteTeamInstance',
         blank=True,
         related_name='team_athletes'
     )
+    # in a league, need to be assigned a team
     league_instance = models.ManyToManyField(
         League,
         blank=True,
         related_name='league_athletes'
     )
-    bio = models.CharField(max_length=125)
-    # league_mvp = models.ManyToManyField(
-    #     League,
-    #     blank=True
-    # )
+    bio = models.CharField(max_length=140,blank=True, null=True)
     #sports interested in for recruiting, convert this section to JSON when postgres is involved
     # soccer = models.BooleanField(default=False)
     #etc...
 
+class AthleteTeamInstance(models.Model):
+    def __str__(self):
+        return self.athlete.user_instance.email + ' | Team: ' + self.team.name
+    athlete = models.ForeignKey(
+        Athlete,
+        on_delete=models.CASCADE
+        )
+    team = models.ForeignKey(
+        Team,
+        on_delete=models.CASCADE
+        )
+    is_suspended = models.BooleanField(default=False)
+
+# Can pull stats history for a player by pulling all stats with their athlete id
 class SoccerStats(models.Model):
+
     athlete_instance = models.ManyToManyField(
         Athlete, 
         blank=False,
         related_name='athlete_soccer_stats'
-        )
-
-    athlete_league = models.ManyToManyField(
-        League,
-        blank=False,
-        related_name='athlete_league_history',
     )
-
-    athlete_team = models.ManyToManyField(
+    # JSON field?
+    athlete_league = models.ForeignKey(
+        League,
+        on_delete=models.CASCADE
+    )
+    # JSON field?
+    athlete_team = models.ForeignKey(
         Team,
-        blank=False,
-        related_name='athlete_team_history'
+        on_delete=models.CASCADE
     )
     #Game instance to be added...
 
-    #input sport stats below...
+    #should sport stats be JSON or regular fields?
     goals = models.IntegerField(blank=True, null=True)
 #add new classes for when we add more sports
