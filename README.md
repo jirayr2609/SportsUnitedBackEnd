@@ -27,6 +27,10 @@ Make sure that you run the following commads where src/ is located
 	
 # Active Enpoints
 
+Uer
+	[GET] Get all user info
+	http://127.0.0.1:8000/api/sporta/accounts/user/<user_id>/
+
 Athletes
 	
 	[GET] Used to retrieve info
