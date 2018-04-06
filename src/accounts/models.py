@@ -87,11 +87,13 @@ class EmailConfirmation(models.Model):
 # =========================================
 
 def post_save_email_registration_confirmation(sender, instance, **kwargs):
-    if kwargs['created']: # this is only applied when new users are added to the User model
-    	# SENDING EMAIL TO CONFIRM REGISTRATION AND CREATING TOKEN FOR USER TO VERIFY
-	    email_instace = SendEmail()
-	    generated_token = get_random_string(length=64)
-	    EmailConfirmation.objects.create(user=instance, token=generated_token)
-	    email_instace.send_confirm_registration(instance.email, generated_token)
+	if kwargs['created']: # this is only applied when new users are added to the User model
+		# SENDING EMAIL TO CONFIRM REGISTRATION AND CREATING TOKEN FOR USER TO VERIFY
+		email_instace = SendEmail()
+		generated_token = get_random_string(length=64)
+		EmailConfirmation.objects.create(user=instance, token=generated_token)
+		email_instace.send_confirm_registration(instance.email, generated_token)
 
-post_save.connect(post_save_email_registration_confirmation, sender=User)
+# post_save.connect(post_save_email_registration_confirmation, sender=User)
+
+

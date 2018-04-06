@@ -61,7 +61,6 @@ class VerifyUsernameViewSet(viewsets.GenericViewSet):
 		else:
 			return Response({'available': 'true'}, status=status.HTTP_200_OK)
 
-
 class SportaRegistrationViewSet(viewsets.ModelViewSet):
 
 	#permission_classes = (AllowAny,)
