@@ -29,8 +29,8 @@ urlpatterns = [
 	url(r'^api/sporta/teams/', include('teams.urls'), name='teams-url'),
 	url(r'^api/sporta/leagues/', include('leagues.urls'), name='leagues-url'),
 	
-	url(r'^rest-auth/', include('rest_auth.urls')),
-	url(r'^rest-auth/registration/', include('rest_auth.registration.urls')), # Basic registration goes through here
+	url(r'^api/rest-auth/', include('rest_auth.urls')),
+	url(r'^api/rest-auth/registration/', include('rest_auth.registration.urls')), # Basic registration goes through here
 	url(r'^api/sporta/contact/', include('contact.urls'), name='contact-url'),
 	# Other routes that may require implementation in the future
 
