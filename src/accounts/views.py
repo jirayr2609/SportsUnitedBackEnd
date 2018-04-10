@@ -56,11 +56,12 @@ class VerifyUsernameViewSet(viewsets.GenericViewSet):
 	def create(self, request):
 		check_user = request.data['username']
 		queryset = User.objects.all().filter(username=check_user)
-		print(queryset)
 		if queryset.exists():
-			return Response({'available': 'false'})
+			return Response({'available': 'false'}, status=status.HTTP_400_BAD_REQUEST)
 		else:
+
 			return Response({'available': 'true'})
+
 
 
 

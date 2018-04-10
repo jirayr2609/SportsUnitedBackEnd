@@ -26,123 +26,212 @@ Make sure that you run the following commads where src/ is located
 	python manage.py runserver 0:8000
 	
 # Active Enpoints
-[GET] ENDPOINTS
 
-Athletes:
+User
 
-	Get all
-	http://127.0.0.1:8000/api/sporta/athletes/
-
-	Get specific
-	http://127.0.0.1:8000/api/sporta/athletes/user_id/
-
-Teams:
-
-	Get all
-	http://127.0.0.1:8000/api/sporta/teams/
-
-	Get specific
-	http://127.0.0.1:8000/api/sporta/teams/team_id/
-
-Leagues:
-
-	Get all
-	http://127.0.0.1:8000/api/sporta/leagues/leagues/
-
-	Get specific
-	http://127.0.0.1:8000/api/sporta/leagues/leagues/league_id/
-
-User Info:
-	
-	Get by id:
+	[GET] Get all user info
 	http://127.0.0.1:8000/api/sporta/accounts/user/<user_id>/
 
+Athletes
+	
+	[GET] Used to retrieve info
+	All: http://127.0.0.1:8000/api/sporta/athletes/
+	One: http://127.0.0.1:8000/api/sporta/athletes/<user_id>
 
-[POST] ENDPOINTS
-
-User:
-
-	Verify Username:
-	http://127.0.0.1:8000/api/sporta/accounts/verify-username/
-
-	Send:
+	[POST] Used to create 
+	http://127.0.0.1:8000/api/sporta/athletes/
+	
+	Input: 
 	{
-		"username": "username",
-	{
-
-	Returns:
-	{
-		"available": "true/false",
+		"bio": "enter bio here"
 	}
 
 
-Athletes:
-
-	Create
-	http://127.0.0.1:8000/api/sporta/athletes/
-	Send:
-	{
-            	'user': user,
-            	'bio': bio,
-        }
-
-Teams:
-
-	Create
-	http://127.0.0.1:8000/api/sporta/teams/
-	Send:
-	{
-            	'name': ,
-            	'abbrev': ,
-            	'bio': ,
-            	'created_at': ,
-            	'updated_at': ,
-        }
-Leagues:
-
-	Create
-	http://127.0.0.1:8000/api/sporta/leagues/leagues/
-	Send:
-	{
-            	'name': ,
-            	'abbrev': ,
-            	'bio': ,
-            	'league_start': ,
-            	'league_end': ,
-            	'playoff_start': ,
-        }
-
-[PUT] ENDPOINTS
-
-	Update League:
-	http://127.0.0.1:8000/api/sporta/leagues/leagues/
-	Send:
-	{
-            	"id": "league_id",
-            	"name": "",
-            	"abbrev": "",
-            	"bio": "",
-            	"league_start": "",
-            	"league_end": "",
-            	"playoff_start": "",
-        }
-
-	Update Team:
-	http://127.0.0.1:8000/api/sporta/teams/
-	{
+	[PUT] Used to edit current data
 	
-        	'name':,
-            	'abbrev': ,
-            	'bio': ,
-            	'created_at': ,
-            	'updated_at': ,
-        }
+	Input: Same as above 
 
-	Update Athlete:
-	http://127.0.0.1:8000/api/sporta/athletes/
+Teams
+
+	[GET] Used to retrieve info
+	All : http://127.0.0.1:8000/api/sporta/teams/
+	One : http://127.0.0.1:8000/api/sporta/teams/<team_id>
+	
+	[POST] Used to create 
+	http://127.0.0.1:8000/api/sporta/teams/
+	
+	Input:
 	{
-            	'user': user,
-            	'bio': bio,
-        }
+		"name": "input name here",
+		"abbrev" : "input 3 letter abbreviation here",
+		"bio" : "enter team bio here",
+		"primary_color" : "enter team primary color here",
+		"secondary_color" : "enter team secondary color here"
+	}
 
+	[PUT] Used to edit current data
+	http://127.0.0.1:8000/api/sporta/teams/
+
+	Input: Not all needs to be filled out
+
+	Input:
+	{
+		"id" : <league_id>,
+		"name": "input name here",
+		"abbrev" : "input 3 letter abbreviation here",
+		"bio" : "enter team bio here",
+		"primary_color" : "enter team primary color here",
+		"secondary_color" : "enter team secondary color here"
+	}
+
+	
+	TEAM ADMIN SECTION (all are [POST] requests)
+	
+	Adding an athlete: http://127.0.0.1:8000/api/sporta/teams/<team_id>/add_athlete/
+	
+	Input:
+	{
+		"user_id" : <id of athlete here>
+	}
+
+
+
+	Removing an athlete : http://127.0.0.1:8000/api/sporta/teams/<team_id>/remove_athlete/
+
+	Input: Same as above
+	
+		
+	Suspending an athlete : http://127.0.0.1:8000/api/sporta/teams/<team_id>/suspend_athlete/
+
+	Input: Same as above
+
+	
+	Changing the team name: http://127.0.0.1:8000/api/sporta/teams/<team_id>/change_name/
+	
+	Input:
+	{
+		"name" : "new team name here"
+	}
+
+
+	Changing the team colors: http://127.0.0.1:8000/api/sporta/teams/<team_id>/change_colors/
+
+	Input: 
+	{
+		"primary_color": "color",
+		"secondary_color": "color"
+	}
+
+Leagues
+
+	[GET] Used to retrieve info
+	All : http://127.0.0.1:8000/api/sporta/leagues/leagues/
+	One : http://127.0.0.1:8000/api/sporta/leagues/leagues/<league_id>
+
+	[POST] Used to create
+	http://127.0.0.1:8000/api/sporta/leagues/leagues/
+
+	Input:
+	{
+		"name" : "name here"
+		"abbrev": "3 letter league abbreviation",
+		"bio": "league bio",
+		"league_start": "league start date",
+		"league_end": "league end date",
+		"playoff_start": "playoff start date",
+	}
+
+	[PUT] Used to edit 
+	http://127.0.0.1:8000/api/sporta/leagues/leagues/
+
+	Input: Not all needs to be filled out
+	{
+		"id" : <league_id>,
+		"name" : "name here",
+		"abbrev": "3 letter league abbreviation",
+		"bio": "league bio",
+		"league_start": "league start date",
+		"league_end": "league end date",
+		"playoff_start": "playoff start date",
+	}
+	
+	LEAGUE ADMIN SECTION (all are [POST] requests)
+	
+	Adding an athlete (for team placement?): http://127.0.0.1:8000/api/sporta/leagues/leagues/add_athlete/
+	
+	Input:
+	{
+		"user_id" : <id of athlete here>
+	}
+
+	
+	Removing an athlete (from team placement?): http://127.0.0.1:8000/api/sporta/leagues/leagues/remove_athlete/
+
+	Input: Same as above
+
+	
+	Suspending an athlete : http://127.0.0.1:8000/api/sporta/leagues/leagues/suspend_athlete/
+
+	Input:
+	{
+		"user_id": <athlete id of user being suspended>
+		"team_id" : <team id the user belongs to>
+	}
+
+	
+	Changing League name : http://127.0.0.1:8000/api/sporta/leagues/leagues/change_name/
+
+	Input:
+	{
+		"name" : "new name here"
+	}
+
+	
+	Changing League colors : http://127.0.0.1:8000/api/sporta/leagues/leagues/change_color/
+
+	Input: 
+	{
+		"primary_color": "color",
+		"secondary_color": "color"
+	}
+
+Divisions in Leagues
+	
+	[GET] Used to retrieve info
+	All : http://127.0.0.1:8000/api/sporta/leagues/divisions/
+	One : http://127.0.0.1:8000/api/sporta/leagues/divisions/<division_id>
+
+	[POST] Used to create
+	http://127.0.0.1:8000/api/sporta/leagues/divisions/
+
+	Input:
+	{
+		"name" : "name here"
+		"abbrev": "3 letter league abbreviation",
+		"league_id": <league_id>
+	}
+
+	[PUT] Used to edit 
+	http://127.0.0.1:8000/api/sporta/leagues/leagues/<divisions>/
+
+	Input: 
+	{
+		"id": <division_id>,
+		"name" : "name here",
+		"abbrev": "3 letter league abbreviation",
+		"league_id": <league_id>
+	}
+
+
+	DIVISION ADMIN SECTION (Based on league owner permissions)
+
+
+	Adding a team
+
+	Removing a team
+
+	Changing division name
+
+
+	
 

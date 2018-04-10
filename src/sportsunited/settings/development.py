@@ -1,3 +1,4 @@
+
 """
 Django settings for sportsunited project.
 
@@ -19,6 +20,9 @@ but the production.py insted
 
 import os
 from .credentials import *
+from datetime import datetime
+from datetime import timedelta
+print ("DEVELOPMENT")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -33,7 +37,7 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '52.90.93.190', '52.90.93.190/api/', '52.90.93.190/api']
 
 
 # Application definition
@@ -76,6 +80,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsPostCsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -106,11 +111,22 @@ WSGI_APPLICATION = 'sportsunited.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+ 'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME':  'sporta',
+        'USER': SPORTA_DBUSER,
+        'PASSWORD': SPORTA_DBPASSWORD,
+    'HOST': 'localhost',
+    'PORT': '',
+ }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -137,7 +153,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
@@ -186,6 +202,17 @@ REST_FRAMEWORK = {
     # )
 }
 
+
+CORS_ORIGIN_WHITELIST = (
+    'google.com',
+    '52.90.93.190',
+    '52.90.93.190/api',
+    '52.90.93.190:8000',
+    'localhost:8000',
+    'localhost:8080',
+    'localhost'
+)
+
 CORS_ALLOW_HEADERS = (
     'x-requested-with',
     'content-type',
@@ -198,7 +225,13 @@ CORS_ALLOW_HEADERS = (
 
 # might remove this later
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_REPLACE_HTTPS_REFERER = False
 
+
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 
 # AUTHENTICATION_BACKENDS = (
@@ -210,10 +243,13 @@ CORS_ORIGIN_ALLOW_ALL = True
 #     #'phone_quick_signup.backends.auth_backends.PhoneAuthenticationBackend',
 # )
 
-
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': timedelta(days=7),
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
+    'JWT_ALLOW_REFRESH': True,
+}
 
 REST_USE_JWT = True
-
 
 
 EMAIL_HOST = 'smtp.gmail.com'

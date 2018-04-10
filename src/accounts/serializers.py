@@ -55,3 +55,9 @@ class UserInfoserializer(serializers.ModelSerializer):
 	class Meta:
 		model = User
 		exclude = ('password',)
+
+class BaseUserInfoSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = User
+		fields = ('email', 'username', 'first_name', 'last_name')

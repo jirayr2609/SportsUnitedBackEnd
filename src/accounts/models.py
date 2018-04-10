@@ -3,8 +3,6 @@ from django.db.models.signals import pre_save, post_save
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.utils.crypto import get_random_string
 from send_email.views import SendEmail
-from teams.models import Team
-from leagues.models import LeagueOwnerPermissions
 
 #from django.contrib.postgres.fields import JSONField
 
@@ -39,18 +37,6 @@ class EmailLoginField(models.EmailField):
 		return value
 
 class User(AbstractBaseUser, PermissionsMixin):
-	# Field for leagues
-	league_admin = models.ManyToManyField(
-		LeagueOwnerPermissions,
-		blank=True
-	)
-
-	# Field for team
-	team_captain = models.ManyToManyField(
-		Team,
-		blank=True
-	)
-
 	A = "A"
 	T = "T"
 	L = "L"
@@ -103,11 +89,13 @@ class EmailConfirmation(models.Model):
 # =========================================
 
 def post_save_email_registration_confirmation(sender, instance, **kwargs):
-    if kwargs['created']: # this is only applied when new users are added to the User model
-    	# SENDING EMAIL TO CONFIRM REGISTRATION AND CREATING TOKEN FOR USER TO VERIFY
-	    email_instace = SendEmail()
-	    generated_token = get_random_string(length=64)
-	    EmailConfirmation.objects.create(user=instance, token=generated_token)
-	    email_instace.send_confirm_registration(instance.email, generated_token)
+	if kwargs['created']: # this is only applied when new users are added to the User model
+		# SENDING EMAIL TO CONFIRM REGISTRATION AND CREATING TOKEN FOR USER TO VERIFY
+		email_instace = SendEmail()
+		generated_token = get_random_string(length=64)
+		EmailConfirmation.objects.create(user=instance, token=generated_token)
+		email_instace.send_confirm_registration(instance.email, generated_token)
 
-post_save.connect(post_save_email_registration_confirmation, sender=User)
+# post_save.connect(post_save_email_registration_confirmation, sender=User)
+
+
